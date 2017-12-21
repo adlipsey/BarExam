@@ -3,7 +3,7 @@
 <h2 class="page-header">Account Login</h2>
   <div class="form-group">
     <label class="amber-text text-darken-3">Username</label>
-    <input type="text" class="form-control" name="username" placeholder="Please Enter Your Username">
+    <input type="text" class="form-control" name="username" id="usernameInput" placeholder="Please Enter Your Username">
   </div>
   <div class="form-group">
     <label class="amber-text text-darken-3">Password</label>
@@ -13,3 +13,7 @@
   <button type="submit" class="btn amber darken-2">Submit</button>
   </div>
 </form>
+<script>
+	var username = "{{data.username}}";
+	var fromSignUp = {{data.fromSignUp}};</script>
+  <script src="../js/login.js"></script>

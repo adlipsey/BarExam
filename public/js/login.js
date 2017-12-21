@@ -1,4 +1,9 @@
-// $(document).ready(function() {
+ $(document).ready(function() {
+ 	var $toastContent = $('<p class="black-text">Sign Up Successful! Please log in</p>');
+ 	if(fromSignUp){
+ 		Materialize.toast($toastContent, 4000, 'light-green accent-2');
+ 		$("input#usernameInput:text").val(username);
+ 	}
 //   var loginForm = $("form.login");
 //   var emailInput = $("input#email-input");
 //   var passwordInput = $("input#password-input");
@@ -30,4 +35,4 @@
 //     });
 //   }
 
-// });
+ });

@@ -7,23 +7,23 @@
   {{/each}}
   {{/if}}
 
-<form method="post" action="/register">
+<form class="signup" method="post" action="/user/register">
     <h2 class="page-header">Register</h2>
     <div class="form-group">
         <label class="amber-text text-darken-3">Username</label>
-        <input type="text" class="form-control" placeholder="How others see you" name="username">
+        <input type="text" class="form-control" placeholder="How others see you" id="username" name="username">
     </div>
     <div class="form-group">
         <label class="amber-text text-darken-3">Email</label>
-        <input type="email" class="form-control" placeholder="you@triviamaster.com" name="email">
+        <input type="email" class="form-control" placeholder="you@triviamaster.com" id="email" name="email">
     </div>
     <div class="form-group">
         <label class="amber-text text-darken-3">Password</label>
-        <input type="password" class="form-control" placeholder="T0tal1ySecur3" name="password">
+        <input type="password" class="form-control" placeholder="T0tal1ySecur3" id="password" name="password">
     </div>
     <div class="form-group">
         <label class="amber-text text-darken-3">Confirm Password</label>
-        <input type="password" class="form-control" placeholder="T0tal1ySecur3" name="password2">
+        <input type="password" class="form-control" placeholder="T0tal1ySecur3" id="passCheck" name="password2">
     </div>
     <div class="center">
         <button type="submit" class="btn btn-default hoverable amber darken-2">Submit</button>

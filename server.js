@@ -75,7 +75,7 @@ var user = require("./routes/user-routes.js")
 var apiRoutes = require("./routes/api-routes.js");
 var appRoutes = require("./routes/app-routes.js")
 app.use("/", routes);
-//app.use("/", user);
+app.use("/user", user);
 //app.use("/", appRoutes)
 //app.use("/api", apiRoutes);
 

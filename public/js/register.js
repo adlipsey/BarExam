@@ -2,26 +2,38 @@ $(document).ready(function() {
     
 
   var signUpForm = $("form.signup");
-  var emailInput = $("input#email-input");
-  var passwordInput = $("input#password-input");
+  var usernameInput = $("input#username");
+  var emailInput = $("input#email");
+  var passwordInput = $("input#password");
+  var passCheck = $("input#passCheck");
 
   signUpForm.on("submit", function(event) {
     event.preventDefault();
     var userData = {
+      username: usernameInput.val().trim(),
       email: emailInput.val().trim(),
       password: passwordInput.val().trim()
     };
 
+    console.log(passwordInput.val().trim() + " = " + passCheck.val().trim());
+
     if (!userData.email || !userData.password) {
       return;
     }
-    signUpUser(userData.email, userData.password);
+    if(passwordInput.val().trim() != passCheck.val().trim()){
+      passCheck.val("Your passwords do not match");
+      return;
+    }
+    signUpUser(userData.username, userData.email, userData.password);
+    usernameInput.val("");
     emailInput.val("");
     passwordInput.val("");
+    passCheck.val("");
   });
 
-  function signUpUser(email, password) {
-    $.post("/api/register", {
+  function signUpUser(username, email, password) {
+    $.post("/user/register", {
+      username: username,
       email: email,
       password: password
     }).then(function(data) {
