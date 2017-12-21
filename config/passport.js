@@ -9,22 +9,20 @@ passport.use(new LocalStrategy(
     passReqToCallback : true
   },
   function(req, username, password, done) {
-    console.log(password)
     db.User.findOne({
       where: {
         username: username
       }
     }).then(function(dbUser) {
       if (!dbUser) {
-        return done(null, false, req.flash("success_msg", "Username invalid"));
+        return done(null, false, {message: "Invalid Username"});
       }
-     
-      if (dbUser && dbUser.validPassword(password)) {
-        console.log("logging in")
-        console.log(dbUser.validPassword(password))
-        return done(null, dbUser, req.flash("success_msg", "login successful"));
+     else if (!dbUser.validPassword(password)) {
+        return done(null, false, {
+          message: "Incorrect Password"
+        });
       }
-      return done(null, false, req.flash("success_msg", "Password Invalid"));
+      return done(null, dbUser);
     });
   }
 ));

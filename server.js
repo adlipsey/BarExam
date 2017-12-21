@@ -6,14 +6,13 @@ var exphbs = require("express-handlebars");
 var router = express.Router();
 var path = require("path");
 
-/*var cookieParser = require("cookies-Parser");
-var expressValidator = require("express-Validator");
-var flash = require("connect-flash");
+//var expressValidator = require("express-Validator");
+
 var session = require("express-session");
 var passport = require("passport");
-var localStrategy = require("passport-local").Starategy;
+var localStrategy = require("passport-local").Strategy;
 
-SALT_WORK_FACTOR = 12;*/
+//SALT_WORK_FACTOR = 12;
 
 
 //Setup Express App
@@ -37,15 +36,15 @@ app.set("view engine", "handlebars");
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Express Session
-/*app.use(session({
+app.use(session({
   secret:'secret',
   saveUninitialized:true,
   resave:true,
-}));*/
+}));
 
 //passport init
-//app.use(passport.initialize());
-//app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Express validator
 /*app.use(expressValidator({
@@ -65,17 +64,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 }));*/
 
-//connect flash
-//app.use(flash());
-
-// Global Vars
-/*app.use(function (req,res,next){
-  res.locals.success_msg = req.flash('success_msg');
-  res.locals.error_msg = req.flash('error_msg');
-  res.locals.error = req.flash('error');
-  res.locals.user = req.user || null,
-  next();
-});*/
 //Setup socket.io
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
