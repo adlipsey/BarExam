@@ -1,6 +1,45 @@
+html, body{
+    height: 100%;
+}
+
+hr {
+    width: 80%;
+}
+
 body {
-    background-color: #FBFCF9;
-    font-family: 'Roboto', sans-serif;
+    background: url("../images/bar-bg.jpeg") center top no-repeat;
+    background-color: #333333;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+form {
+    margin: 5%;
+    padding: 5%;
+}
+
+.page-header {
+    text-decoration: underline;
+    text-decoration-color: #ff8f00;
+}
+
+.container {
+    color: white;
+    background-color: rgba(35,35,35,.7);
+    min-height: 80vh;
+}
+
+#logo {
+    margin-top: 2vh;
+    border: 5px solid black;
+    width: 40vmax;
+    max-width: 100%;
+    height: auto;
 }
 
 .spc{

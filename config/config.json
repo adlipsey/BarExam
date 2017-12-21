@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "safety",
-    "database": "boozeclues_db",
+    "database": "barexam_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },

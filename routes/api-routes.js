@@ -50,7 +50,7 @@ function getQs(req, cb){
 	});
 
 //Update team score after every question.
-	router.put("/user_game", function(req, res){
+	/*router.put("/user_game", function(req, res){
 		console.log(req.body);
 		db.Score.update({
 			num_corr: req.body.num_corr,
@@ -63,9 +63,9 @@ function getQs(req, cb){
 			//do something with result
 			res.send(result);
 		});
-	});
+	});*/
 
-  router.post("/register", function(req, res) {
+  /*router.post("/register", function(req, res) {
     console.log(req.body);
     db.User.create({
       email: req.body.email,
@@ -77,7 +77,7 @@ function getQs(req, cb){
       console.log(err);
       res.json(err);
     });
-  });
+  });*/
 
 module.exports = router;
 

@@ -5,15 +5,15 @@ var bodyParser = require("body-parser");
 var exphbs = require("express-handlebars");
 var router = express.Router();
 var path = require("path");
-var cookieParser = require("cookies-Parser");
 
+/*var cookieParser = require("cookies-Parser");
 var expressValidator = require("express-Validator");
 var flash = require("connect-flash");
 var session = require("express-session");
 var passport = require("passport");
 var localStrategy = require("passport-local").Starategy;
 
-SALT_WORK_FACTOR = 12;
+SALT_WORK_FACTOR = 12;*/
 
 
 //Setup Express App
@@ -34,22 +34,21 @@ app.engine("handlebars", exphbs({defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 
 //Static directory
-//app.use(express.static(path.join(__dirname, '/public')));
-// app.use(express.static(process.cwd() + "/public"));
 app.use(express.static(path.join(__dirname, 'public')));
+
 // Express Session
-app.use(session({
+/*app.use(session({
   secret:'secret',
   saveUninitialized:true,
   resave:true,
-}));
+}));*/
 
 //passport init
-app.use(passport.initialize());
-app.use(passport.session());
+//app.use(passport.initialize());
+//app.use(passport.session());
 
 //Express validator
-app.use(expressValidator({
+/*app.use(expressValidator({
   errorFormatter: function(param,msg,value){
     var namespace = param.split('.'),
     root = namespace.shift(),
@@ -64,19 +63,19 @@ app.use(expressValidator({
     };
   }
 
-}));
+}));*/
 
 //connect flash
-app.use(flash());
+//app.use(flash());
 
 // Global Vars
-app.use(function (req,res,next){
+/*app.use(function (req,res,next){
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');
   res.locals.user = req.user || null,
   next();
-});
+});*/
 //Setup socket.io
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
@@ -88,9 +87,9 @@ var user = require("./routes/user-routes.js")
 var apiRoutes = require("./routes/api-routes.js");
 var appRoutes = require("./routes/app-routes.js")
 app.use("/", routes);
-app.use("/", user);
-app.use("/", appRoutes)
-app.use("/api", apiRoutes);
+//app.use("/", user);
+//app.use("/", appRoutes)
+//app.use("/api", apiRoutes);
 
 
 //Setup sequelize

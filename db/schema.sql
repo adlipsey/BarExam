@@ -1,37 +1,3 @@
-DROP DATABASE IF EXISTS boozeclues_db;
-CREATE DATABASE boozeclues_db;
+DROP DATABASE IF EXISTS barexam_db;
+CREATE DATABASE barexam_db;
 
-CREATE TABLE users(
-  id INT NOT NULL AUTO_INCREMENT,
-  pic VARCHAR(80) NULL,
-  email VARCHAR(40) NOT NULL,
-  pass VARCHAR(20) NOT  NULL,
-  access BOOLEAN NOT NULL,
-  PRIMARY KEY (id)
-);
-
-CREATE TABLE games(
-  id INT NOT NULL AUTO_INCREMENT,
-  name VARCHAR(30) NOT NULL,
-  active BOOLEAN DEFAULT true,
-  PRIMARY KEY (id)
-);
-
-CREATE TABLE teams(
-  id INT NOT NULL AUTO_INCREMENT,
-  name VARCHAR(30) NOT NULL,
-  PRIMARY KEY (id)
-);
-
-CREATE TABLE users(
-  id INT NOT NULL AUTO_INCREMENT,
-  num_corr INT(300) NULL,
-  total_ques INT(300) NOT NULL,
-  scor_val INT(1) DEFAULT 0,
-  game_vic BOOLEAN DEFAULT false,
-  PRIMARY KEY (id)
-);
-
-SELECT * FROM users;
-SELECT * FROM games;
-SELECT * FROM teams;
