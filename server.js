@@ -5,9 +5,8 @@ var bodyParser = require("body-parser");
 var exphbs = require("express-handlebars");
 var router = express.Router();
 var path = require("path");
-
-//var expressValidator = require("express-Validator");
-
+var logger = require("morgan");
+var mongoose = require("mongoose");
 var session = require("express-session");
 var passport = require("passport");
 var localStrategy = require("passport-local").Strategy;
@@ -20,6 +19,8 @@ var localStrategy = require("passport-local").Strategy;
 var app = express();
 var PORT = process.env.PORT || 8080;
 
+//Set up dev logger
+app.use(logger("dev"));
 
 //Setup bodyParser
 app.use(bodyParser.json());
@@ -46,24 +47,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-//Express validator
-/*app.use(expressValidator({
-  errorFormatter: function(param,msg,value){
-    var namespace = param.split('.'),
-    root = namespace.shift(),
-    formParam = root;
-    while(namespace.length){
-      formParam += '[' + namespace.shift() + ']';
-    }
-    return{
-      param : formParam,
-      msg : msg,
-      value : value
-    };
-  }
-
-}));*/
-
 //Setup socket.io
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
@@ -80,16 +63,19 @@ app.use("/user", user);
 //app.use("/api", apiRoutes);
 
 
-//Setup sequelize
+//Setup Mongoose
 //====================================
 var db = require("./models");
+mongoose.Promise = Promise;
+mongoose.connect("mongodb://localhost/barexam", {
+  useMongoClient: true
+});
 
 //Sync models and start server
-db.sequelize.sync().then(function() {
-  server.listen(PORT, function() {
-    console.log("App listening on PORT " + PORT);
-  });
+server.listen(PORT, function() {
+  console.log("App listening on PORT " + PORT);
 });
+
 
 //Socket events
 //====================================

@@ -7,7 +7,7 @@ var username;
   router.post("/register", function(req, res) {
     console.log(req.body);
     username = req.body.username;
-    db.User.create({
+    db.User.save({
       username: req.body.username,
       email: req.body.email,
       password: req.body.password

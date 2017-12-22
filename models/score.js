@@ -1,36 +1,46 @@
 
-module.exports = function(sequelize, DataTypes) {
-  var Score = sequelize.define("Score", {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
+var mongoose = require("mongoose");
+var Schema = mongoose.Schema;
+
+var ScoreSchema = new Schema({
+    gamePoints: {
+      type: Number,
+      default: 0
     },
-    currentPoints: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
+    numRight: {
+      type: Number,
+      default: 0
     },
-    currentRight: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
+    numTotal: {
+      type: Number,
+      default: 0
     },
-    currentTotal: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
+    dateCreated: {
+      type: Date,
+      default: Date.now()
     },
-    careerPoints: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "User"
     },
-    careerRight: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-    },
-    careerTotal: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
+    game: {
+      type: Schema.Types.ObjectId,
+      ref: "Game"
     }
     });
 
-  return Score;
-};
+  //Set user
+  ScoreSchema.methods.setUser = function(userID){
+    this.user = userID;
+    return this.user;
+  };
+
+  //Set game
+  ScoreSchema.methods.setGame = function(gameID){
+    this.game = gameID;
+    return this.game;
+  };
+
+var Score = mongoose.model("Score", ScoreSchema);
+
+module.exports = Score;
