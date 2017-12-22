@@ -10,7 +10,7 @@ var GameSchema = new Schema({
     },
     roomNum: {
       type: String,
-    }
+    },
     dateCreated: {
       type: Date,
       default: Date.now()

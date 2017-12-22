@@ -2,7 +2,7 @@
 var bcrypt = require("bcrypt-nodejs");
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
-SALT SALT_WORK_FACTOR = 10;
+SALT_WORK_FACTOR = 10;
 
 var UserSchema = new Schema({
     username: {
@@ -47,7 +47,7 @@ UserSchema.pre("save", function(next){
   bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt){
     if(err) return next(err);
     //Encrypt based on key
-    bcrypt.hash(user.password, salt, function(err, hash){
+    bcrypt.hash(user.password, salt, null, function(err, hash){
       if(err) return next(err);
       //Overwrite password
       user.password = hash;
