@@ -2,26 +2,20 @@ $(document).ready(function() {
     
 
   var signUpForm = $("form.signup");
-  var usernameInput = $("input#username");
-  var emailInput = $("input#email");
-  var passwordInput = $("input#password");
-  var passCheck = $("input#passCheck");
+  var usernameInput = $("#username");
+  var emailInput = $("#email");
+  var passwordInput = $("#password");
 
   signUpForm.on("submit", function(event) {
-    event.preventDefault();
+    //event.preventDefault();
     var userData = {
       username: usernameInput.val().trim(),
       email: emailInput.val().trim(),
       password: passwordInput.val().trim()
     };
 
-    console.log(passwordInput.val().trim() + " = " + passCheck.val().trim());
 
     if (!userData.email || !userData.password) {
-      return;
-    }
-    if(passwordInput.val().trim() != passCheck.val().trim()){
-      passCheck.val("Your passwords do not match");
       return;
     }
     signUpUser(userData.username, userData.email, userData.password);
@@ -32,7 +26,8 @@ $(document).ready(function() {
   });
 
   function signUpUser(username, email, password) {
-    $.post("/user/register", {
+    alert(password);
+    $.post("/register", {
       username: username,
       email: email,
       password: password
@@ -44,5 +39,5 @@ $(document).ready(function() {
   function handleLoginErr(err) {
     $("#alert .msg").text(err.responseJSON);
     $("#alert").fadeIn(500);
-  }
+  }*/
 });

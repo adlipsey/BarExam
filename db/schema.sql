@@ -1,3 +1,0 @@
-DROP DATABASE IF EXISTS barexam_db;
-CREATE DATABASE barexam_db;
-

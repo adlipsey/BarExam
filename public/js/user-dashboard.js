@@ -2,6 +2,10 @@
 
 $(document).ready(function() {
 
+  console.log(userInfo);
+
+  $("#username").text("Welcome, " + userInfo);
+
  /* router.get("/all", function(req, res) {
     res.json("userid");
     });

@@ -1,17 +1,16 @@
 //Dependencies
 //=====================================
-var express = require("express");
-var bodyParser = require("body-parser");
-var exphbs = require("express-handlebars");
-var router = express.Router();
-var path = require("path");
-var logger = require("morgan");
-var mongoose = require("mongoose");
-var session = require("express-session");
+const express = require("express");
+const bodyParser = require("body-parser");
+const exphbs = require("express-handlebars");
+const router = express.Router();
+const path = require("path");
+const logger = require("morgan");
+const mongoose = require("mongoose");
+const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
+const dbConnection = require("./db");
 var passport = require("passport");
-var localStrategy = require("passport-local").Strategy;
-
-//SALT_WORK_FACTOR = 12;
 
 
 //Setup Express App
@@ -25,8 +24,6 @@ app.use(logger("dev"));
 //Setup bodyParser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.text());
-app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 //Setup Handlebars view engine
 app.set('views', path.join(__dirname, 'views'));
@@ -36,16 +33,18 @@ app.set("view engine", "handlebars");
 //Static directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Express Session
-app.use(session({
-  secret:'secret',
-  saveUninitialized:true,
-  resave:true,
-}));
-
 //passport init
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Express Session
+app.use(session({
+  secret:'totally secret',
+  store: new MongoStore({mongooseConnection: dbConnection}),
+  saveUninitialized: false,
+  resave: false,
+}));
+
 
 //Setup socket.io
 var server = require('http').Server(app);
@@ -53,25 +52,15 @@ var io = require('socket.io')(server);
 
 //Routes
 //====================================
-var routes = require("./routes/html-routes.js");
-var user = require("./routes/user-routes.js")
-var apiRoutes = require("./routes/api-routes.js");
-var appRoutes = require("./routes/app-routes.js")
-app.use("/", routes);
-app.use("/user", user);
+//var apiRoutes = require("./routes/api-routes.js");
+//var appRoutes = require("./routes/app-routes.js")
+app.use('/', require('./auth'));
+app.use("/", require("./routes/html-routes.js"));
 //app.use("/", appRoutes)
 //app.use("/api", apiRoutes);
 
 
-//Setup Mongoose
-//====================================
-var db = require("./models");
-mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/barexam", {
-  useMongoClient: true
-});
-
-//Sync models and start server
+//start server
 server.listen(PORT, function() {
   console.log("App listening on PORT " + PORT);
 });

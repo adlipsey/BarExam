@@ -6,6 +6,7 @@ var router = express.Router();
     router.get("/", function(req, res) {
         res.render("index");
       });
+
     //Register
     router.get("/register", function(req, res) {
       res.render("register");
@@ -27,9 +28,10 @@ var router = express.Router();
           res.render("bar-game", {id: req.params.id});
       });
 
-    // User Dashboard
-       router.get("/user-dashboard", function(req, res) {
-           res.render("user-dashboard");
+      // User Dashboard
+      router.get("/user-dashboard/:userName", function(req, res) {
+            var username = req.params.userName;
+           res.render("user-dashboard", {data: username});
        });
        
     // Bar Game Page

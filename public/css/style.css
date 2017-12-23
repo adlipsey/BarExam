@@ -42,11 +42,12 @@ form {
     height: auto;
 }
 
+#username {
+    color: black;
+}
+
 .spc{
     margin-top: 5pt;
-}
-.nav-wrapper{
-    background-color: #DB4E4A;
 }
 
 /* USER DASH PAGE */
